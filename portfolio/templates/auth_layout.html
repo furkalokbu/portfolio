@@ -1,18 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Portfolio</title>
-</head>
-<body>
-    <div class="auth-box">
+{% extends "base.html" %}
+{% block style %}
 
-        {% block content %}
-        {% endblock%}
-    
+    <title>Portfolio</title>
+    <style>
+        html, body {
+            height: 100%;
+            font-family: "Playfair Display", serif;
+        }
+        .auth-box {
+            border: 3px solid lightgrey;
+            border-radius: 10px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            width: 600px;
+            margin: auto;
+        }
+        .login-form-container {
+            width: 300px;
+            margin: auto;
+        }
+        .registration-form-container {
+            width: 400px;
+            margin: auto;
+        }
+        .outer-area {
+            margin-top: 100px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+<div class="outer-area">
+    <div class="auth-box text-center">
+        {% block auth %}
+        {% endblock %}
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

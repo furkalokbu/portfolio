@@ -5,11 +5,18 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-gettext = lambda s: s
+# gettext = lambda s: s
 PROJ_MODULE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 ROOT = os.path.normpath(os.path.join(PROJ_MODULE_ROOT, ".."))
-root_path = lambda *args: os.path.join(ROOT, *args)
-path = lambda *args: os.path.join(PROJ_MODULE_ROOT, *args)
+
+
+def root_path(*args):
+    return os.path.join(ROOT, *args)
+
+
+def path(*args):
+    return os.path.join(PROJ_MODULE_ROOT, *args)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -123,22 +130,20 @@ USE_L10N = True
 
 USE_TZ = True
 
-# LOGIN_URL = "accounts/login/"
-# LOGIN_REDIRECT_URL = "/"
-# LOGOUT_REDIRECT_URL = "/"
+LOGIN_URL = "accounts/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = root_path('static')
-MEDIA_URL = '/media/'
-MEDIA_ROOT = root_path('media')
+STATIC_URL = "/static/"
+STATIC_ROOT = root_path("static")
+MEDIA_URL = "/media/"
+MEDIA_ROOT = root_path("media")
 
 
-STATICFILES_DIRS = (
-    path('static'),
-)
+STATICFILES_DIRS = (path("static"),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -165,7 +170,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly'
-    ]
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly"
+    ],
 }
