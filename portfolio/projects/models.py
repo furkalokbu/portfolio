@@ -14,9 +14,30 @@ class Portfolio(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(_("description"), blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    main_image = models.ImageField(
+        _("main image"),
+        upload_to=get_file_path,
+        help_text=_("recommended size 1000x665"),
+        null=True,
+        blank=True,
+    )
+    large = ImageSpecField([ResizeToFill(930, 310)], source="main_image")
+    thumbnail = ImageSpecField([ResizeToFill(360, 320)], source="main_image")
+
+    def image_url(self):
+        return self.thumbnail.url
+
+    @property
+    def upload_dir(self):
+        return "portfolio/main_images/"
+
+    class Meta:
+        ordering = ("created_at",)
+        verbose_name = _("Portfolio")
 
     def __str__(self):
         return self.author.username
+
 
 class Image(models.Model):
 
@@ -33,9 +54,13 @@ class Image(models.Model):
         null=True,
         blank=True,
     )
-    
+
     large = ImageSpecField([ResizeToFill(930, 310)], source="image")
     thumbnail = ImageSpecField([ResizeToFill(360, 320)], source="image")
+
+    @property
+    def upload_dir(self):
+        return "portfolio/images/"
 
     def __str__(self):
         return self.title
